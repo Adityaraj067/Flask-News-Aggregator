@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-2xl font-semibold mb-6 capitalize">Top {{ selected }} News</h2>
+
+{% if articles %}
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {% for article in articles %}
+    <div class="bg-white dark:bg-gray-800 text-black dark:text-gray-200 rounded-lg shadow-md transform transition duration-300 hover:shadow-2xl hover:scale-105 hover:bg-gray-100 dark:hover:bg-gray-700 overflow-hidden">
+      
+      <img src="{{ article.urlToImage or 'https://via.placeholder.com/400x200' }}"
+           class="w-full h-48 object-cover" alt="News Image">
+      
+      <div class="p-4">
+        <h3 class="text-lg font-bold text-blue-700 dark:text-blue-400 mb-2">
+          {{ article.title }}
+        </h3>
+        <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
+          {{ article.description or 'No description available.' }}
+        </p>
+        <a href="{{ article.url }}" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">
+          Read more →
+        </a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+<p class="text-center text-red-600 dark:text-red-400">No articles found for this category.</p>
+{% endif %}
+{% endblock %}
